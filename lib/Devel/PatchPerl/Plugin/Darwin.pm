@@ -7,7 +7,7 @@ use warnings;
 
 my @patch = (
     {
-	perl => [ qr/^5\.8\.9$/ ],
+	perl => [ qw/ 5.8.9 5.10.1 / ],
 	subs => [ [ \&_patch_darwin_locale_test ] ],
     },
 );
