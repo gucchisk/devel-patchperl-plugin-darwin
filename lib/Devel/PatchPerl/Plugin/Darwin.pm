@@ -43,3 +43,32 @@ END
 }
 
 1;
+
+__END__
+
+=head1 NAME
+
+Devel::PatchPerl::Plugin::Darrwin - patchperl plugin for darwin
+
+=head1 SYNOPSIS
+
+    export PERL5_PATCHPERL_PLUGIN=Darwin
+    perlbrew install 5.8.9
+
+=head1 DESCRIPTION
+
+This module is a patchperl plugin for avoiding failure of test on MacOSX(Darwin)
+
+Currently support perl version is bellow.
+
+=item * 5.8.9
+
+=item * 5.10.1
+
+=head1 AUTHOR
+
+gucchisk
+
+=head1 REPOSITORY
+
+L<https://github.com/gucchisk/devel-patchperl-plugin-darwin>
