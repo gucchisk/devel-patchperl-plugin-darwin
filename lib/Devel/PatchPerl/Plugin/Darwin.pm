@@ -27,7 +27,7 @@ my @patch = (
 	subs => [ [ \&_patch_darwin_locale_test5150 ] ],
     },
     {
-	perl => [ qr/^5\.15\.[89]$/, qr/^5\.16\.[0-3]$/ ],
+	perl => [ qr/^5\.15\.[89]$/, qr/^5\.16\.[0-3]$/, qr/^5\.17\.\d+/, qr/^5\.18\.[0-4]$/, qr/^5\.19\.[0-8]/ ],
 	subs => [ [ \&_patch_darwin_locale_test5158 ] ],
     },
 );
