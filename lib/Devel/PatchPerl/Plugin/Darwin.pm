@@ -7,12 +7,28 @@ use warnings;
 
 my @patch = (
     {
-	perl => [ qw/5.8.9 5.10.1/, qr/^5\.9\.[0-5]$/ ],
+	perl => [ qw/5.8.9 5.10.1 5.11.0/, qr/^5\.9\.[0-5]$/ ],
 	subs => [ [ \&_patch_darwin_locale_test589 ] ],
     },
     {
-	perl => [ qw/5.12.5/ ],
+	perl => [ qr/^5\.11\.[1-5]$/, qr/^5\.12\.[0-4]/, '5.13.0' ],
+	subs => [ [ \&_patch_darwin_locale_test5111 ] ],
+    },
+    {
+	perl => [ '5.12.5', qr/^5\.14\.[0-4]/ ],
 	subs => [ [ \&_patch_darwin_locale_test5125 ] ],
+    },
+    {
+	perl => [ qr/^5\.13\.[1-9]$/, qr/^5\.13\.(10|11)/ ],
+	subs => [ [ \&_patch_darwin_locale_test5131 ] ],
+    },
+    {
+	perl => [ qr/^5\.15\.[0-7]$/ ],
+	subs => [ [ \&_patch_darwin_locale_test5150 ] ],
+    },
+    {
+	perl => [ qr/^5\.15\.[89]$/, qr/^5\.16\.[0-3]$/ ],
+	subs => [ [ \&_patch_darwin_locale_test5158 ] ],
     },
 );
 
@@ -46,6 +62,23 @@ END
     Devel::PatchPerl::_patch($patch);
 }
 
+sub _patch_darwin_locale_test5111 {
+    my $patch = <<'END';
+--- lib/locale.t
++++ lib/locale.t
+@@ -460,7 +460,7 @@ if ($^O eq 'darwin') {
+     if ($v >= 8 and $v < 10) {
+ 	debug "# Skipping eu_ES, be_BY locales -- buggy in Darwin\n";
+ 	@Locale = grep ! m/^(eu_ES|be_BY\.CP1131)$/, @Locale;
+-    } elsif ($v < 11) {
++    } else {
+ 	debug "# Skipping be_BY locales -- buggy in Darwin\n";
+ 	@Locale = grep ! m/^be_BY\.CP1131$/, @Locale;
+     }
+END
+    Devel::PatchPerl::_patch($patch);
+}
+
 sub _patch_darwin_locale_test5125 {
     my $patch = <<'END';
 --- lib/locale.t
@@ -55,6 +88,57 @@ sub _patch_darwin_locale_test5125 {
  	debug "# Skipping eu_ES, be_BY locales -- buggy in Darwin\n";
  	@Locale = grep ! m/^(eu_ES(?:\..*)?|be_BY\.CP1131)$/, @Locale;
 -    } elsif ($v < 13) {
++    } else {
+ 	debug "# Skipping be_BY locales -- buggy in Darwin\n";
+ 	@Locale = grep ! m/^be_BY\.CP1131$/, @Locale;
+     }
+END
+    Devel::PatchPerl::_patch($patch);
+}
+
+sub _patch_darwin_locale_test5131 {
+    my $patch = <<'END';
+--- lib/locale.t
++++ lib/locale.t
+@@ -460,7 +460,7 @@ if ($^O eq 'darwin') {
+     if ($v >= 8 and $v < 10) {
+ 	debug "# Skipping eu_ES, be_BY locales -- buggy in Darwin\n";
+ 	@Locale = grep ! m/^(eu_ES(?:\..*)?|be_BY\.CP1131)$/, @Locale;
+-    } elsif ($v < 11) {
++    } else {
+ 	debug "# Skipping be_BY locales -- buggy in Darwin\n";
+ 	@Locale = grep ! m/^be_BY\.CP1131$/, @Locale;
+     }
+END
+    Devel::PatchPerl::_patch($patch);
+}
+
+sub _patch_darwin_locale_test5150 {
+    my $patch = <<'END';
+--- lib/locale.t
++++ lib/locale.t
+@@ -460,7 +460,7 @@ if ($^O eq 'darwin') {
+     if ($v >= 8 and $v < 10) {
+ 	debug "# Skipping eu_ES, be_BY locales -- buggy in Darwin\n";
+ 	@Locale = grep ! m/^(eu_ES(?:\..*)?|be_BY\.CP1131)$/, @Locale;
+-    } elsif ($v < 12) {
++    } else {
+ 	debug "# Skipping be_BY locales -- buggy in Darwin\n";
+ 	@Locale = grep ! m/^be_BY\.CP1131$/, @Locale;
+     }
+END
+    Devel::PatchPerl::_patch($patch);
+}
+
+sub _patch_darwin_locale_test5158 {
+    my $patch = <<'END';
+--- lib/locale.t
++++ lib/locale.t
+@@ -648,7 +648,7 @@ if ($^O eq 'darwin') {
+     if ($v >= 8 and $v < 10) {
+ 	debug "# Skipping eu_ES, be_BY locales -- buggy in Darwin\n";
+ 	@Locale = grep ! m/^(eu_ES(?:\..*)?|be_BY\.CP1131)$/, @Locale;
+-    } elsif ($v < 12) {
 +    } else {
  	debug "# Skipping be_BY locales -- buggy in Darwin\n";
  	@Locale = grep ! m/^be_BY\.CP1131$/, @Locale;
