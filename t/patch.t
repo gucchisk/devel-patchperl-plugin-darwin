@@ -7,7 +7,7 @@ use Devel::PatchPerl;
 use Devel::PatchPerl::Hints qw[hint_file];
 
 $ENV{PERL5_PATCHPERL_PLUGIN} = 'Darwin';
-my @versions = ('5.8.9', '5.10.1');
+my @versions = ('5.8.9', '5.10.1', '5.12.5');
 my $os = $^O;
 
 for my $v (@versions) {
