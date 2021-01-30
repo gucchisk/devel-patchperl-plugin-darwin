@@ -30,6 +30,14 @@ my @patch = (
 	perl => [ qr/^5\.15\.[89]$/, qr/^5\.16\.[0-3]$/, qr/^5\.17\.\d+/, qr/^5\.18\.[0-4]$/, qr/^5\.19\.[0-8]/ ],
 	subs => [ [ \&_patch_darwin_locale_test5158 ] ],
     },
+    {
+	perl => [ qr/^5\.23\.[0-9]$/, qr/^5\.24\.[0-4]$/ ],
+	subs => [ [ \&_patch_darwin_libperl_test5240 ] ],
+    },
+    {
+	perl => [ qr/^5\.25\.]d+/, qr/^5\.26\.[0-3]$/, qr/^5\.27\.\d+/, qr/^5\.28\.[0-3]$/ ],
+	subs => [ [ \&_patch_darwin_libperl_test5250 ] ],
+    },
 );
 
 sub patchperl {
@@ -143,6 +151,40 @@ sub _patch_darwin_locale_test5158 {
  	debug "# Skipping be_BY locales -- buggy in Darwin\n";
  	@Locale = grep ! m/^be_BY\.CP1131$/, @Locale;
      }
+END
+    Devel::PatchPerl::_patch($patch);
+}
+
+sub _patch_darwin_libperl_test5240 {
+    my $patch = <<'END';
+--- t/porting/libperl.t
++++ t/porting/libperl.t
+@@ -550,7 +550,7 @@ if (defined $nm_err_tmp) {
+         while (<$nm_err_fh>) {
+             # OS X has weird error where nm warns about
+             # "no name list" but then outputs fine.
+-            if (/nm: no name list/ && $^O eq 'darwin') {
++            if ((/nm: no name list/ || /^no symbols$/) && $^O eq 'darwin') {
+                 print "# $^O ignoring $nm output: $_";
+                 next;
+             }
+END
+    Devel::PatchPerl::_patch($patch);
+}
+    
+sub _patch_darwin_libperl_test5250 {
+    my $patch = <<'END';
+--- t/porting/libperl.t
++++ t/porting/libperl.t
+@@ -574,7 +574,7 @@ if (defined $nm_err_tmp) {
+         while (<$nm_err_fh>) {
+             # OS X has weird error where nm warns about
+             # "no name list" but then outputs fine.
+-            if (/nm: no name list/ && $^O eq 'darwin') {
++            if ((/nm: no name list/ || /^no symbols$/) && $^O eq 'darwin') {
+                 print "# $^O ignoring $nm output: $_";
+                 next;
+             }
 END
     Devel::PatchPerl::_patch($patch);
 }
