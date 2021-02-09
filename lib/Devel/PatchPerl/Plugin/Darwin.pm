@@ -31,8 +31,16 @@ my @patch = (
 	subs => [ [ \&_patch_darwin_locale_test5158 ] ],
     },
     {
-	perl => [ qr/^5\.23\.[0-9]$/, qr/^5\.24\.[0-4]$/ ],
-	subs => [ [ \&_patch_darwin_libperl_test5240 ] ],
+	perl => [ qr/^5\.22\.[34]$/ ],
+	subs => [ [ \&_patch_darwin_customized_dat5223 ] ],
+    },
+    {
+	perl => [ qr/^5\.22\.[0-4]$/, qr/^5\.23\.[0-9]$/, qr/^5\.24\.[0-4]$/ ],
+	subs => [ [ \&_patch_darwin_libperl_test5230 ] ],
+    },
+    {
+	perl => [ qr/^5\.24\.[1-4]$/ ],
+	subs => [ [ \&_patch_darwin_customized_dat5241 ] ],
     },
     {
 	perl => [ qr/^5\.25\.]d+/, qr/^5\.26\.[0-3]$/, qr/^5\.27\.\d+/, qr/^5\.28\.[0-3]$/ ],
@@ -155,8 +163,8 @@ END
     Devel::PatchPerl::_patch($patch);
 }
 
-sub _patch_darwin_libperl_test5240 {
-    my $patch = <<'END';
+sub _patch_darwin_libperl_test5230 {
+   my $patch = <<'END';
 --- t/porting/libperl.t
 +++ t/porting/libperl.t
 @@ -550,7 +550,7 @@ if (defined $nm_err_tmp) {
@@ -171,7 +179,41 @@ sub _patch_darwin_libperl_test5240 {
 END
     Devel::PatchPerl::_patch($patch);
 }
-    
+
+sub _patch_darwin_customized_dat5223 {
+    my $patch = <<'END';
+--- t/porting/customized.dat
++++ t/porting/customized.dat
+@@ -20,7 +20,7 @@ ExtUtils::Command cpan/ExtUtils-Command/
+ ExtUtils::MakeMaker cpan/ExtUtils-MakeMaker/bin/instmodsh 5bc04a0173b8b787f465271b6186220326ae8eef
+ ExtUtils::MakeMaker cpan/ExtUtils-MakeMaker/lib/ExtUtils/Command/MM.pm 6298f9b41b29e13010b185f64fa952570637fbb4
+ ExtUtils::MakeMaker cpan/ExtUtils-MakeMaker/lib/ExtUtils/Liblist.pm 6e16329fb4d4c2f8db4afef4d8e79c1c1c918128
+-ExtUtils::MakeMaker cpan/ExtUtils-MakeMaker/lib/ExtUtils/Liblist/Kid.pm fc0483c5c7b92a8e0f63eb1f762172cddce5b948
++ExtUtils::MakeMaker cpan/ExtUtils-MakeMaker/lib/ExtUtils/Liblist/Kid.pm 9239e2140e8d78d2d70802eff7ff07cb147bf0c6
+ ExtUtils::MakeMaker cpan/ExtUtils-MakeMaker/lib/ExtUtils/MakeMaker.pm 8d1b35fcd7d3b4f0552ffb151baf75ccb181267b
+ ExtUtils::MakeMaker cpan/ExtUtils-MakeMaker/lib/ExtUtils/MakeMaker/Config.pm 676b10e16b2dc68ba21312ed8aa4d409e86005a6
+ ExtUtils::MakeMaker cpan/ExtUtils-MakeMaker/lib/ExtUtils/MakeMaker/FAQ.pod 757bffb47857521311f8f3bde43ebe165f8d5191
+END
+    Devel::PatchPerl::_patch($patch);
+}
+
+sub _patch_darwin_customized_dat5241 {
+    my $patch = <<'END';
+--- t/porting/customized.dat
++++ t/porting/customized.dat
+@@ -22,7 +22,7 @@ ExtUtils::MakeMaker cpan/ExtUtils-MakeMa
+ ExtUtils::MakeMaker cpan/ExtUtils-MakeMaker/lib/ExtUtils/Command.pm e3a372e07392179711ea9972087c1105a2780fad
+ ExtUtils::MakeMaker cpan/ExtUtils-MakeMaker/lib/ExtUtils/Command/MM.pm b72721bd6aa9bf7ec328bda99a8fdb63cac6114d
+ ExtUtils::MakeMaker cpan/ExtUtils-MakeMaker/lib/ExtUtils/Liblist.pm 0e1e4c25eddb999fec6c4dc66593f76db34cfd16
+-ExtUtils::MakeMaker cpan/ExtUtils-MakeMaker/lib/ExtUtils/Liblist/Kid.pm bfd2aa00ca4ed251f342e1d1ad704abbaf5a615e
++ExtUtils::MakeMaker cpan/ExtUtils-MakeMaker/lib/ExtUtils/Liblist/Kid.pm 47d2fdf890d7913ccd0e32b5f98a98f75745d227
+ ExtUtils::MakeMaker cpan/ExtUtils-MakeMaker/lib/ExtUtils/MakeMaker.pm 5529ae3064365eafd99536621305d52f4ab31b45
+ ExtUtils::MakeMaker cpan/ExtUtils-MakeMaker/lib/ExtUtils/MakeMaker/Config.pm bc88b275af73b8faac6abd59a9aad3f625925810
+ ExtUtils::MakeMaker cpan/ExtUtils-MakeMaker/lib/ExtUtils/MakeMaker/FAQ.pod 062e5d14a803fbbec8d61803086a3d7997e8a473
+END
+    Devel::PatchPerl::_patch($patch);
+}
+
 sub _patch_darwin_libperl_test5250 {
     my $patch = <<'END';
 --- t/porting/libperl.t
