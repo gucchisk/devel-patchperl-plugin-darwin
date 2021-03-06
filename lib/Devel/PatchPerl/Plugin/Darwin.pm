@@ -6,7 +6,7 @@ use strict;
 use warnings;
 use version;
 
-our $VERSION = 'v0.1.0';
+our $VERSION = 'v0.1.1';
 
 my @patch = (
     {
