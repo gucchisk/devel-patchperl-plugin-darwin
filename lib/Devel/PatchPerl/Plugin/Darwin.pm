@@ -4,6 +4,9 @@ require Devel::PatchPerl;
 
 use strict;
 use warnings;
+use version;
+
+our $VERSION = 'v0.1.0';
 
 my @patch = (
     {
@@ -668,9 +671,33 @@ This module is a patchperl plugin for avoiding failure of test on MacOSX(Darwin)
 
 Currently support perl version is bellow.
 
-=item * 5.8.9
+=item * 5.32.1
+
+=item * 5.30.3
+
+=item * 5.28.3
+
+=item * 5.26.3
+
+=item * 5.24.4
+
+=item * 5.22.4
+
+=item * 5.20.3
+
+=item * 5.18.4
+
+=item * 5.16.3
+
+=item * 5.14.4
+
+=item * 5.12.5
 
 =item * 5.10.1
+
+=item * 5.8.9
+
+=item * 5.6.2
 
 =head1 AUTHOR
 
@@ -679,3 +706,7 @@ gucchisk
 =head1 REPOSITORY
 
 L<https://github.com/gucchisk/devel-patchperl-plugin-darwin>
+
+=head1 SEE ALSO
+
+L<Devel::PatchPerl::Plugin>
