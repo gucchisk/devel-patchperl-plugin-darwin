@@ -1,5 +1,5 @@
 # auto-generated shipit config file.
-steps = FindVersion, ChangeVersion, Commit, Tag, MakeDist
+steps = FindVersion, ChangeVersion, Commit, Tag, MakeDist, UploadCPAN
 git.push_to = origin
 # svn.tagpattern = MyProj-%v
 # svn.tagpattern = http://code.example.com/svn/tags/MyProj-%v
