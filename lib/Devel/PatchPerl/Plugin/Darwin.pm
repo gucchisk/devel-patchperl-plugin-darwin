@@ -671,6 +671,8 @@ This module is a patchperl plugin for avoiding failure of test on MacOSX(Darwin)
 
 Currently support perl version is bellow.
 
+=over 4
+
 =item * 5.32.1
 
 =item * 5.30.3
@@ -698,6 +700,8 @@ Currently support perl version is bellow.
 =item * 5.8.9
 
 =item * 5.6.2
+
+=back
 
 =head1 AUTHOR
 
