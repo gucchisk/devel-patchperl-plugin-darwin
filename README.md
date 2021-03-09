@@ -40,4 +40,4 @@ $ ./Build test
 ```
 $ shipit
 ```
-See [.shipit]
+See [.shipit](.shipit)
