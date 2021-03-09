@@ -27,3 +27,17 @@ $ cpanm -S git://github.com/gucchisk/devel-patchperl-plugin-darwin.git
 ```
 $ export PERL5_PATCHPERL_PLUGIN=Darwin
 ```
+
+## Development
+
+### Test
+```
+$ perl Build.PL
+$ ./Build test
+```
+
+### Release
+```
+$ shipit
+```
+See [.shipit]
