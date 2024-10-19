@@ -34,8 +34,6 @@ jobs:
             .
       - name: build perl 5.28.3
         run: |
-          mkdir -p build
-          cd build
           wget https://www.cpan.org/src/5.0/perl-5.28.3.tar.gz
           tar zxf perl-5.28.3.tar.gz
           cd perl-5.28.3
