@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 jobs:
   test-patch:
-    runs-on: [macos-12, macos-13]
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v4
       - name: Test
