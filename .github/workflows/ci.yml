@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 jobs:
   test-patch:
-    runs-on: macos-12
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
       - name: install with cpanminus
@@ -21,3 +21,26 @@ jobs:
         run: |
           perl Build.PL
           ./Build test
+  test-macos12:
+    runs-on: macos-12
+    steps:
+      - uses: actions/checkout@v4
+      - name: install with cpanminus
+        uses: perl-actions/install-with-cpanm@v1.7
+        with:
+          install: |
+            Module::Build
+            Devel::PatchPerl
+            .
+      - name: build perl 5.28.3
+        run: |
+          mkdir -p build
+          cd build
+          wget https://www.cpan.org/src/5.0/perl-5.28.3.tar.gz
+          tar zxf perl-5.28.3.tar.gz
+          cd perl-5.28.3
+          export PERL5_PATCHPERL_PLUGIN=Darwin
+          patchperl
+          ./configure
+          make
+          make test
