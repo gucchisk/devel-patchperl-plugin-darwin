@@ -32,6 +32,10 @@ jobs:
             Module::Build
             Devel::PatchPerl
             .
+      - name: cpanm info
+        run: |
+          cpanm --version
+          echo $PATH
       - name: build perl 5.28.3
         run: |
           wget https://www.cpan.org/src/5.0/perl-5.28.3.tar.gz
