@@ -1,0 +1,17 @@
+name: CI
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+jobs:
+  test-patch:
+    runs-on: [macos-14, macos-15]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test
+        run: |
+          perl Build.PL
+          ./Build test
