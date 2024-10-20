@@ -38,6 +38,7 @@ jobs:
           ls -al /Users/runner/.cpanm
           sudo chown -R runner /Users/runner/.cpanm
           echo $PATH
+          export PATH=$PATH:/usr/local/Cellar/perl/5.38.2_1/bin
           perl --version
           /usr/local/Cellar/perl/5.38.2_1/bin/cpanm --version
       - name: build perl 5.28.3
