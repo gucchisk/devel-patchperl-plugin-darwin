@@ -50,6 +50,6 @@ jobs:
           cd perl-5.28.3
           export PERL5_PATCHPERL_PLUGIN=Darwin
           patchperl
-          ./configure -des
+          ./Configure -de
           make
           make test
