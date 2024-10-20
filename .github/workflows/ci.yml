@@ -36,7 +36,7 @@ jobs:
         run: |
           whoami
           ls -al /Users/runner/.cpanm
-          sudo chown runner /Users/runner/.cpanm
+          sudo chown -R runner /Users/runner/.cpanm
           echo $PATH
           perl --version
           /usr/local/Cellar/perl/5.38.2_1/bin/cpanm --version
