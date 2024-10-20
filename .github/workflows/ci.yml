@@ -41,15 +41,10 @@ jobs:
           ls /usr/local/Cellar/perl/5.38.2_1/bin
           perl --version
           /usr/local/Cellar/perl/5.38.2_1/bin/cpanm --version
-      - name: build perl 5.28.3
+      - name: perl 5.28.3
         run: |
-          export PATH=$PATH:/usr/local/Cellar/perl/5.38.2_1/bin
-          echo $PATH
-          wget https://www.cpan.org/src/5.0/perl-5.28.3.tar.gz
-          tar zxf perl-5.28.3.tar.gz
-          cd perl-5.28.3
+          curl -L https://install.perlbrew.pl | bash
+          source ~/perl5/perlbrew/etc/bashrc
+          perlbrew install-patchperl
           export PERL5_PATCHPERL_PLUGIN=Darwin
-          patchperl
-          ./Configure -de
-          make
-          make test
+          perlbrew install perl-5.28.3
