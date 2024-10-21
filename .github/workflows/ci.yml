@@ -37,15 +37,15 @@ jobs:
             Module::Build
             Devel::PatchPerl
             .
-      - name: cpanm info
-        run: |
-          whoami
-          ls -al /Users/runner/.cpanm
-          sudo chown -R runner /Users/runner/.cpanm
-          echo $PATH
-          ls /usr/local/Cellar/perl/5.38.2_1/bin
-          perl --version
-          /usr/local/Cellar/perl/5.38.2_1/bin/cpanm --version
+      # - name: cpanm info
+      #   run: |
+      #     whoami
+      #     ls -al /Users/runner/.cpanm
+      #     sudo chown -R runner /Users/runner/.cpanm
+      #     echo $PATH
+      #     ls /usr/local/Cellar/perl/5.38.2_1/bin
+      #     perl --version
+      #     /usr/local/Cellar/perl/5.38.2_1/bin/cpanm --version
       - name: perl
         run: |
           curl -L https://install.perlbrew.pl | bash
