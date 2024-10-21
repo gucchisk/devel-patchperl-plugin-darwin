@@ -47,4 +47,4 @@ jobs:
           source ~/perl5/perlbrew/etc/bashrc
           perlbrew install-patchperl
           export PERL5_PATCHPERL_PLUGIN=Darwin
-          perlbrew install perl-5.28.3
+          perlbrew install --debug perl-5.28.3
