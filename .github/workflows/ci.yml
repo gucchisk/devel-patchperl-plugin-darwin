@@ -21,8 +21,13 @@ jobs:
         run: |
           perl Build.PL
           ./Build test
-  test-macos13:
-    runs-on: macos-13
+  test-macos:
+    strategy:
+      matrix:
+        os: [macos-13, macos-14, macos-15]
+        version: [5.26.3, 5.28.3]
+        
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - name: install with cpanminus
@@ -41,10 +46,10 @@ jobs:
           ls /usr/local/Cellar/perl/5.38.2_1/bin
           perl --version
           /usr/local/Cellar/perl/5.38.2_1/bin/cpanm --version
-      - name: perl 5.28.3
+      - name: perl
         run: |
           curl -L https://install.perlbrew.pl | bash
           source ~/perl5/perlbrew/etc/bashrc
           perlbrew install-patchperl
           export PERL5_PATCHPERL_PLUGIN=Darwin
-          perlbrew --verbose install perl-5.28.3
+          perlbrew --verbose install perl-${{ matrix.version }}
