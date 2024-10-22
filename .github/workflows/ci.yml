@@ -30,13 +30,13 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
-      - name: install with cpanminus
-        uses: perl-actions/install-with-cpanm@v1.7
-        with:
-          install: |
-            Module::Build
-            Devel::PatchPerl
-            .
+      # - name: install with cpanminus
+      #   uses: perl-actions/install-with-cpanm@v1.7
+      #   with:
+      #     install: |
+      #       Module::Build
+      #       Devel::PatchPerl
+      #       .
       # - name: cpanm info
       #   run: |
       #     whoami
@@ -51,5 +51,9 @@ jobs:
           curl -L https://install.perlbrew.pl | bash
           source ~/perl5/perlbrew/etc/bashrc
           perlbrew install-patchperl
+          perlbrew install-cpanm
+          cpanm Module::Build
+          cpanm Devel::PatchPerl
+          cpanm .
           export PERL5_PATCHPERL_PLUGIN=Darwin
           perlbrew --verbose install perl-${{ matrix.version }}
