@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 jobs:
   test-patch:
-    runs-on: macos-12
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
       - name: install with cpanminus
@@ -21,3 +21,39 @@ jobs:
         run: |
           perl Build.PL
           ./Build test
+  test-macos:
+    strategy:
+      matrix:
+        os: [macos-13, macos-14, macos-15]
+        version: [5.6.2, 5.8.9, 5.10.1, 5.12.5, 5.14.4, 5.16.3, 5.18.4, 5.20.3, 5.22.4, 5.24.4, 5.26.3, 5.28.3, 5.30.3, 5.32.1]
+        
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      # - name: install with cpanminus
+      #   uses: perl-actions/install-with-cpanm@v1.7
+      #   with:
+      #     install: |
+      #       Module::Build
+      #       Devel::PatchPerl
+      #       .
+      # - name: cpanm info
+      #   run: |
+      #     whoami
+      #     ls -al /Users/runner/.cpanm
+      #     sudo chown -R runner /Users/runner/.cpanm
+      #     echo $PATH
+      #     ls /usr/local/Cellar/perl/5.38.2_1/bin
+      #     perl --version
+      #     /usr/local/Cellar/perl/5.38.2_1/bin/cpanm --version
+      - name: perl-${{ matrix.version }} on ${{ matrix.os }}
+        run: |
+          curl -L https://install.perlbrew.pl | bash
+          source ~/perl5/perlbrew/etc/bashrc
+          perlbrew install-patchperl
+          perlbrew install-cpanm
+          cpanm Module::Build
+          cpanm Devel::PatchPerl
+          cpanm .
+          export PERL5_PATCHPERL_PLUGIN=Darwin
+          perlbrew --verbose install perl-${{ matrix.version }}

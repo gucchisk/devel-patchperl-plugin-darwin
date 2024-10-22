@@ -639,7 +639,17 @@ sub _patch_darwin_libperl_test5250 {
     my $patch = <<'END';
 --- t/porting/libperl.t
 +++ t/porting/libperl.t
-@@ -574,7 +574,7 @@ if (defined $nm_err_tmp) {
+@@ -241,7 +241,8 @@ sub nm_parse_gnu {
+ sub nm_parse_darwin {
+     my $symbols = shift;
+     my $line = $_;
+-    if (m{^(?:.+)?libperl\.a\((\w+\.o)\):$}) {
++    if (m{^(?:.+)?libperl\.a\((\w+\.o)\):$} ||
++        m{^(\w+\.o):$}) {
+         # object file name
+         $symbols->{obj}{$1}++;
+         $symbols->{o} = $1;
+@@ -574,7 +575,7 @@ if (defined $nm_err_tmp) {
          while (<$nm_err_fh>) {
              # OS X has weird error where nm warns about
              # "no name list" but then outputs fine.
