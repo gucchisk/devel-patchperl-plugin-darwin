@@ -1,6 +1,7 @@
 # Devel::PatchPerl::Plugin::Darwin
 
 ## Support
+### Perl Version
 * perl-5.32.1
 * perl-5.30.3
 * perl-5.28.3
@@ -15,6 +16,11 @@
 * perl-5.10.1
 * perl-5.8.9
 * perl-5.6.2
+
+### MacOS Version
+* MacOS13(Ventura)
+* MacOS14(Sonoma)
+* MacOS15(Sequoia)
 
 ## Install (for perlbrew)
 
