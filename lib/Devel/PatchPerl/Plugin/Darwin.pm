@@ -64,7 +64,7 @@ my @patch = (
 	subs => [ [ \&_patch_darwin_libperl_test5250 ] ],
     },
     {
-	perl => [ qr/^5\.30\.\d+/, qr/^5\.32\.\d+/ ],
+	perl => [ qr/^5\.30\.\d+/, qr/^5\.32\.\d+/, qr/^5\.33\.0/ ],
 	subs => [ [ \&_patch_darwin_libperl_test5300 ] ],
     },
 );
